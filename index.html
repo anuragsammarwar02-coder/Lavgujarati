@@ -1,10 +1,666 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Gujarati Trader | NIFTY • BANKNIFTY • OPTIONS</title>
-<!-- Meta Pixel Code -->
+
+  <style>
+
+    /* =========================
+       GLOBAL RESET
+    ========================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    /* =========================
+       HTML + BODY
+    ========================== */
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+      background: #0b1220;
+      color: #ffffff;
+
+      margin: 0;
+
+      /*
+        IMPORTANT:
+
+        body ko flex nahi banaya gaya hai.
+
+        Meta Event Setup Tool apne elements
+        page mein inject karta hai. Agar body
+        flex container hota hai to injected
+        elements layout ko disturb kar sakte hain.
+      */
+    }
+
+
+    /* =========================
+       PAGE WRAPPER
+    ========================== */
+
+    .page-wrapper {
+
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 16px;
+    }
+
+
+    /* =========================
+       MAIN CARD
+    ========================== */
+
+    .card {
+
+      width: 100%;
+      max-width: 420px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #0f1a2e 0%,
+          #0b1220 100%
+        );
+
+      border-radius: 28px;
+
+      padding: 36px 28px 32px;
+
+      text-align: center;
+
+      box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, 0.45);
+
+      border:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+    }
+
+
+    /* =========================
+       LOGO
+    ========================== */
+
+    .logo-wrap {
+
+      width: 96px;
+      height: 96px;
+
+      margin:
+        0 auto 22px;
+
+      border-radius: 50%;
+
+      background: #ffffff;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 8px 24px
+        rgba(0, 0, 0, 0.35);
+    }
+
+
+    .logo-wrap img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    /* =========================
+       HEADING
+    ========================== */
+
+    h1 {
+
+      font-size: 28px;
+      font-weight: 800;
+
+      color: #f5c518;
+
+      letter-spacing: 0.5px;
+
+      margin-bottom: 6px;
+
+      text-transform: uppercase;
+    }
+
+
+    .sub {
+
+      font-size: 14px;
+      font-weight: 600;
+
+      color: #e8eef7;
+
+      letter-spacing: 1.2px;
+
+      margin-bottom: 8px;
+    }
+
+
+    .desc {
+
+      font-size: 13px;
+
+      color: #9aa8bc;
+
+      margin-bottom: 26px;
+    }
+
+
+    /* =========================
+       TELEGRAM BUTTON
+    ========================== */
+
+    .btn {
+
+      display: block;
+
+      width: 100%;
+
+      background: #22c55e;
+
+      color: #ffffff;
+
+      text-decoration: none;
+
+      font-size: 16px;
+      font-weight: 700;
+
+      padding: 16px 20px;
+
+      border-radius: 14px;
+
+      margin-bottom: 16px;
+
+      box-shadow:
+        0 8px 20px
+        rgba(34, 197, 94, 0.35);
+
+      transition:
+        transform 0.15s ease;
+
+      border: none;
+
+      cursor: pointer;
+
+      font-family: inherit;
+
+      text-align: center;
+    }
+
+
+    .btn:active {
+
+      transform: scale(0.98);
+    }
+
+
+    .btn .rocket {
+
+      margin-right: 6px;
+    }
+
+
+    /* =========================
+       TRUST BOX
+    ========================== */
+
+    .trust-box {
+
+      background:
+        rgba(15, 40, 55, 0.7);
+
+      border:
+        1px solid
+        rgba(34, 197, 94, 0.25);
+
+      border-radius: 14px;
+
+      padding: 14px 16px;
+
+      margin-bottom: 22px;
+
+      text-align: left;
+    }
+
+
+    .trust-box p {
+
+      font-size: 14px;
+
+      color: #c8d6e5;
+
+      margin: 4px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
+    }
+
+
+    .trust-box .check {
+
+      color: #22c55e;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       FEATURES
+    ========================== */
+
+    .features {
+
+      text-align: left;
+
+      margin-bottom: 24px;
+    }
+
+
+    .features li {
+
+      list-style: none;
+
+      font-size: 14.5px;
+
+      color: #d1dce8;
+
+      margin: 10px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+    }
+
+
+    .features .tick {
+
+      color: #22c55e;
+
+      font-weight: 700;
+
+      font-size: 15px;
+    }
+
+
+    /* =========================
+       TIMER BOX
+    ========================== */
+
+    .timer-box {
+
+      background:
+        rgba(245, 197, 24, 0.08);
+
+      border:
+        1px solid
+        rgba(245, 197, 24, 0.25);
+
+      border-radius: 12px;
+
+      padding: 12px 16px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .timer-label {
+
+      font-size: 13px;
+
+      color: #f5c518;
+
+      font-weight: 600;
+
+      margin-bottom: 4px;
+    }
+
+
+    .timer {
+
+      font-size: 28px;
+
+      font-weight: 800;
+
+      color: #f5c518;
+
+      letter-spacing: 1px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .footer-notes {
+
+      margin-top: 8px;
+
+      font-size: 12.5px;
+
+      color: #8b9bb0;
+
+      line-height: 1.6;
+    }
+
+
+    .footer-notes .item {
+
+      margin: 6px 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 6px;
+    }
+
+
+    .footer-notes .highlight {
+
+      color: #f5c518;
+
+      font-weight: 600;
+    }
+
+
+    .agency {
+
+      margin-top: 20px;
+
+      font-size: 11px;
+
+      color: #6b7a8f;
+
+      letter-spacing: 0.3px;
+    }
+
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media (max-width: 380px) {
+
+      .page-wrapper {
+
+        padding: 12px;
+      }
+
+
+      .card {
+
+        padding:
+          28px
+          20px
+          26px;
+      }
+
+
+      h1 {
+
+        font-size: 24px;
+      }
+
+    }
+
+  </style>
+
+
+
+
+
+
+
+  <!--
+    IMPORTANT:
+
+    Flex layout yahan wrapper par hai,
+    BODY par nahi.
+
+    Isse Meta Event Setup Tool ke
+    injected elements page layout ko
+    disturb karne ke chances kam ho jaate hain.
+  -->
+
+  <div class="page-wrapper">
+
+
+    <div class="card">
+
+
+      <!-- LOGO -->
+
+      <div class="logo-wrap">
+
+        <img src="https://growwvix.pro/wp-content/uploads/2026/08/images-2.jpg" alt="Gujarati Trader Logo">
+
+      </div>
+
+
+      <!-- TITLE -->
+
+      <h1>Gujarati Trader</h1>
+
+
+      <div class="sub">
+
+        NIFTY • BANKNIFTY • OPTIONS
+
+      </div>
+
+
+      <div class="desc">
+
+        Daily Intraday Trading Signals &amp; Analysis
+
+      </div>
+
+
+      <!-- FIRST TELEGRAM BUTTON -->
+
+      <a class="btn" id="join-telegram-btn-1" href="https://t.me/+1OYKlqoKWiQwNWZl">
+
+        🚀 Join Free Telegram Channel
+
+      </a>
+
+
+      <!-- TRUST BOX -->
+
+      <div class="trust-box">
+
+        <p>
+
+          <span class="check">✓</span>
+
+          Trusted by 5,000+ Traders
+
+        </p>
+
+
+        <p>
+
+          <span class="check">✓</span>
+
+          Daily Consistent Setups
+
+        </p>
+
+      </div>
+
+
+      <!-- FEATURES -->
+
+      <ul class="features">
+
+
+        <li>
+
+          <span class="tick">✓</span>
+
+          5–7 High Probability Trades
+
+        </li>
+
+
+        <li>
+
+          <span class="tick">✓</span>
+
+          Exact Entry, SL &amp; Target
+
+        </li>
+
+
+        <li>
+
+          <span class="tick">✓</span>
+
+          Beginner Friendly Guidance
+
+        </li>
+
+
+        <li>
+
+          <span class="tick">✓</span>
+
+          Live Market Updates
+
+        </li>
+
+
+      </ul>
+
+
+      <!-- SECOND TELEGRAM BUTTON -->
+
+      <a class="btn" id="join-telegram-btn-2" href="https://t.me/+1OYKlqoKWiQwNWZl">
+
+        🚀 Join Free Telegram Channel
+
+      </a>
+
+
+      <!-- TIMER -->
+
+      <div class="timer-box">
+
+        <div class="timer-label">
+
+          Redirecting in
+
+        </div>
+
+
+        <div class="timer" id="countdown">
+
+          10
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER -->
+
+      <div class="footer-notes">
+
+
+        <div class="item">
+
+          ⏳
+
+          <span class="highlight">
+
+            Free Access Closing Soon
+
+          </span>
+
+        </div>
+
+
+        <div class="item">
+
+          📈 Limited Seats • Active Community
+
+        </div>
+
+
+        <div class="item">
+
+          ⚠️ Market investments are subject to risk
+
+        </div>
+
+
+      </div>
+
+
+      <div class="agency">
+
+        Ads managed by AK GrowthX Agency
+
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- =========================
+       META PIXEL CODE
+  ========================== -->
+
+ <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -21,265 +677,66 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1409425607958571&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-  
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: #0b1220;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 16px;
-    }
 
-    .card {
-      width: 100%;
-      max-width: 420px;
-      background: linear-gradient(180deg, #0f1a2e 0%, #0b1220 100%);
-      border-radius: 28px;
-      padding: 36px 28px 32px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-    }
 
-    .logo-wrap {
-      width: 96px;
-      height: 96px;
-      margin: 0 auto 22px;
-      border-radius: 50%;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
-    }
-
-    .logo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: #f5c518;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-    }
-
-    .sub {
-      font-size: 14px;
-      font-weight: 600;
-      color: #e8eef7;
-      letter-spacing: 1.2px;
-      margin-bottom: 8px;
-    }
-
-    .desc {
-      font-size: 13px;
-      color: #9aa8bc;
-      margin-bottom: 26px;
-    }
-
-    .btn {
-      display: block;
-      width: 100%;
-      background: #22c55e;
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 16px 20px;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(34, 197, 94, 0.35);
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn .rocket {
-      margin-right: 6px;
-    }
-
-    .trust-box {
-      background: rgba(15, 40, 55, 0.7);
-      border: 1px solid rgba(34, 197, 94, 0.25);
-      border-radius: 14px;
-      padding: 14px 16px;
-      margin-bottom: 22px;
-      text-align: left;
-    }
-
-    .trust-box p {
-      font-size: 14px;
-      color: #c8d6e5;
-      margin: 4px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .trust-box .check {
-      color: #22c55e;
-      font-weight: 700;
-    }
-
-    .features {
-      text-align: left;
-      margin-bottom: 24px;
-    }
-
-    .features li {
-      list-style: none;
-      font-size: 14.5px;
-      color: #d1dce8;
-      margin: 10px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .features .tick {
-      color: #22c55e;
-      font-weight: 700;
-      font-size: 15px;
-    }
-
-    .timer-box {
-      background: rgba(245, 197, 24, 0.08);
-      border: 1px solid rgba(245, 197, 24, 0.25);
-      border-radius: 12px;
-      padding: 12px 16px;
-      margin-bottom: 18px;
-    }
-
-    .timer-label {
-      font-size: 13px;
-      color: #f5c518;
-      font-weight: 600;
-      margin-bottom: 4px;
-    }
-
-    .timer {
-      font-size: 28px;
-      font-weight: 800;
-      color: #f5c518;
-      letter-spacing: 1px;
-    }
-
-    .footer-notes {
-      margin-top: 8px;
-      font-size: 12.5px;
-      color: #8b9bb0;
-      line-height: 1.6;
-    }
-
-    .footer-notes .item {
-      margin: 6px 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    .footer-notes .highlight {
-      color: #f5c518;
-      font-weight: 600;
-    }
-
-    .agency {
-      margin-top: 20px;
-      font-size: 11px;
-      color: #6b7a8f;
-      letter-spacing: 0.3px;
-    }
-
-    @media (max-width: 380px) {
-      .card {
-        padding: 28px 20px 26px;
-      }
-      h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <div class="logo-wrap">
-      <img src="https://growwvix.pro/wp-content/uploads/2026/08/images-2.jpg" alt="Gujarati Trader Logo">
-    </div>
-
-    <h1>Gujarati Trader</h1>
-    <div class="sub">NIFTY • BANKNIFTY • OPTIONS</div>
-    <div class="desc">Daily Intraday Trading Signals &amp; Analysis</div>
-
-    <a class="btn" href="https://t.me/+1OYKlqoKWiQwNWZl" id="joinBtn">
-      <span class="rocket">🚀</span> Join Free Telegram Channel
-    </a>
-
-    <div class="trust-box">
-      <p><span class="check">✓</span> Trusted by 5,000+ Traders</p>
-      <p><span class="check">✓</span> Daily Consistent Setups</p>
-    </div>
-
-    <ul class="features">
-      <li><span class="tick">✓</span> 5–7 High Probability Trades</li>
-      <li><span class="tick">✓</span> Exact Entry, SL &amp; Target</li>
-      <li><span class="tick">✓</span> Beginner Friendly Guidance</li>
-      <li><span class="tick">✓</span> Live Market Updates</li>
-    </ul>
-
-    <a class="btn" href="https://t.me/+1OYKlqoKWiQwNWZl">
-      <span class="rocket">🚀</span> Join Free Telegram Channel
-    </a>
-
-    <div class="timer-box">
-      <div class="timer-label">Redirecting in</div>
-      <div class="timer" id="countdown">10</div>
-    </div>
-
-    <div class="footer-notes">
-      <div class="item">⏳ <span class="highlight">Free Access Closing Soon</span></div>
-      <div class="item">📈 Limited Seats • Active Community</div>
-      <div class="item">⚠️ Market investments are subject to risk</div>
-    </div>
-
-    <div class="agency">Ads managed by AK GrowthX Agency</div>
-  </div>
+  <!-- =========================
+       COUNTDOWN REDIRECT
+  ========================== -->
 
   <script>
-    (function () {
-      var seconds = 10;
-      var el = document.getElementById("countdown");
-      var link = "https://t.me/+1OYKlqoKWiQwNWZl";
 
-      var timer = setInterval(function () {
-        seconds--;
-        if (seconds <= 0) {
-          clearInterval(timer);
-          el.textContent = "0";
-          window.location.href = link;
-        } else {
-          el.textContent = seconds;
-        }
-      }, 1000);
+    (function () {
+
+      var seconds = 10;
+
+      var el =
+        document.getElementById(
+          "countdown"
+        );
+
+
+      var link =
+        "https://t.me/+1OYKlqoKWiQwNWZl";
+
+
+      var timer =
+        setInterval(
+          function () {
+
+
+            seconds--;
+
+
+            if (
+              seconds <= 0
+            ) {
+
+              clearInterval(timer);
+
+
+              el.textContent =
+                "0";
+
+
+              window.location.href =
+                link;
+
+            }
+
+            else {
+
+              el.textContent =
+                seconds;
+
+            }
+
+
+          },
+          1000
+        );
+
+
     })();
+
   </script>
-</body>
-</html>
